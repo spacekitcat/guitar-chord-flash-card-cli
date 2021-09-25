@@ -21,43 +21,59 @@ def render_fret_section(fret, guitar_string_count):
 
 def get_chords():
   return {
-    'a_major': [
-      [],
-      [2, 3, 4],
-      [],
-    ],
-    'c_major': [
-      [2],
-      [4],
-      [5],
-    ],
-    'd_major': [
-      [],
-      [1, 3],
-      [2],
-    ],
-    'g_major': [
-      [],
-      [5],
-      [1, 6],
-    ],
-    'e_major': [
-      [3],
-      [4, 5]
-    ],
-    'e_minor': [
-      [],
-      [4, 5]
-    ],
-    'd_minor': [
-      [1],
-      [3],
-      [2]
-    ],
-    'a_minor': [
-      [2],
-      [3, 4],
-    ]
+    'a_major': {
+      'frets': [
+        [],
+        [2, 3, 4],
+        [],
+      ],
+    },
+    'c_major': {
+      'frets': [
+        [2],
+        [4],
+        [5],
+      ]
+    },
+    'd_major': {
+      'frets': [
+        [],
+        [1, 3],
+        [2],
+      ]
+    },
+    'g_major': {
+      'frets': [
+        [],
+        [5],
+        [1, 6],
+      ]
+    },
+    'e_major': {
+      'frets': [
+        [3],
+        [4, 5]
+      ]
+    },
+    'e_minor': {
+      'frets': [
+        [],
+        [4, 5]
+      ]
+    },
+    'd_minor': {
+      'frets': [
+        [1],
+        [3],
+        [2]
+      ]
+    },
+    'a_minor': {
+      'frets': [
+        [2],
+        [3, 4],
+      ]
+    },
   }
 
 
@@ -91,7 +107,7 @@ def main():
   for i in range(quiz_question_count):
     random_chord_key = random.choice(list(chord_map.keys()))
     if random_chord_key in chord_map:
-      render_chord(chord_map[random_chord_key], guitar_string_count)
+      render_chord(chord_map[random_chord_key]['frets'], guitar_string_count)
       current_question_number = i+1
     
       if show_quiz_prompt(chord_map, current_question_number, quiz_question_count) == random_chord_key:
