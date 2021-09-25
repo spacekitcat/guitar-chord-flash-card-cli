@@ -2,12 +2,22 @@ import sys
 import random
 import inquirer
 
+def render_fret_header(closed_strings, guitar_string_count):
+  for i in range(0, guitar_string_count):
+    guitar_string = guitar_string_count - i
+    if guitar_string in closed_strings:
+      sys.stdout.write('X ')
+    else:
+      sys.stdout.write('  ')
+  sys.stdout.write('\n')
+
 
 def render_fret_seperator(character, guitar_string_count):
   fret_character_count = (guitar_string_count * 2) - 1 
   for i in range(fret_character_count):
     sys.stdout.write(character)
   sys.stdout.write('\n')
+
 
 def render_fret_section(fret, guitar_string_count):
   for i in range(0, guitar_string_count):
@@ -21,53 +31,79 @@ def render_fret_section(fret, guitar_string_count):
 
 def get_chords():
   return {
-    'a_major': [
-      [],
-      [2, 3, 4],
-      [],
-    ],
-    'c_major': [
-      [2],
-      [4],
-      [5],
-    ],
-    'd_major': [
-      [],
-      [1, 3],
-      [2],
-    ],
-    'g_major': [
-      [],
-      [5],
-      [1, 6],
-    ],
-    'e_major': [
-      [3],
-      [4, 5]
-    ],
-    'e_minor': [
-      [],
-      [4, 5]
-    ],
-    'd_minor': [
-      [1],
-      [3],
-      [2]
-    ],
-    'a_minor': [
-      [2],
-      [3, 4],
-    ]
+    'a_major': {
+      'frets': [
+        [],
+        [2, 3, 4],
+        [],
+      ],
+      'closed_strings': [6]
+    },
+    'c_major': {
+      'frets': [
+        [2],
+        [4],
+        [5],
+      ],
+      'closed_strings': [6]
+    },
+    'd_major': {
+      'frets': [
+        [],
+        [1, 3],
+        [2],
+      ],
+      'closed_strings': [5, 6]
+    },
+    'g_major': {
+      'frets': [
+        [],
+        [5],
+        [1, 6],
+      ],
+      'closed_strings': []
+    },
+    'e_major': {
+      'frets': [
+        [3],
+        [4, 5]
+      ],
+      'closed_strings': []
+    },
+    'e_minor': {
+      'frets': [
+        [],
+        [4, 5]
+      ],
+      'closed_strings': []
+    },
+    'd_minor': {
+      'frets': [
+        [1],
+        [3],
+        [2]
+      ],
+      'closed_strings': [5, 6]
+
+    },
+    'a_minor': {
+      'frets': [
+        [2],
+        [3, 4],
+      ],
+      'closed_strings': [6]
+    },
   }
 
 
 def render_chord(chord, guitar_string_count):
-    render_fret_seperator('=', guitar_string_count)
-    for fret in chord:
-      render_fret_section([], guitar_string_count)
-      render_fret_section(fret, guitar_string_count)
-      render_fret_section([], guitar_string_count)
-      render_fret_seperator('-', guitar_string_count)
+  render_fret_header(chord['closed_strings'], guitar_string_count)
+  render_fret_seperator('=', guitar_string_count)
+  for fret in chord['frets']:
+    render_fret_section([], guitar_string_count)
+    render_fret_section(fret, guitar_string_count)
+    render_fret_section([], guitar_string_count)
+    render_fret_seperator('-', guitar_string_count)
 
 
 def show_quiz_prompt(chords, current_question, current_question_number):
