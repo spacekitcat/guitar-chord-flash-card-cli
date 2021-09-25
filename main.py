@@ -27,52 +27,61 @@ def get_chords():
         [2, 3, 4],
         [],
       ],
+      'closed_strings': [6]
     },
     'c_major': {
       'frets': [
         [2],
         [4],
         [5],
-      ]
+      ],
+      'closed_strings': [6]
     },
     'd_major': {
       'frets': [
         [],
         [1, 3],
         [2],
-      ]
+      ],
+      'closed_strings': [5, 6]
     },
     'g_major': {
       'frets': [
         [],
         [5],
         [1, 6],
-      ]
+      ],
+      'closed_strings': []
     },
     'e_major': {
       'frets': [
         [3],
         [4, 5]
-      ]
+      ],
+      'closed_strings': []
     },
     'e_minor': {
       'frets': [
         [],
         [4, 5]
-      ]
+      ],
+      'closed_strings': []
     },
     'd_minor': {
       'frets': [
         [1],
         [3],
         [2]
-      ]
+      ],
+      'closed_strings': [5, 6]
+
     },
     'a_minor': {
       'frets': [
         [2],
         [3, 4],
-      ]
+      ],
+      'closed_strings': [6]
     },
   }
 
