@@ -2,12 +2,22 @@ import sys
 import random
 import inquirer
 
+def render_fret_header(closed_strings, guitar_string_count):
+  for i in range(0, guitar_string_count):
+    guitar_string = guitar_string_count - i
+    if guitar_string in closed_strings:
+      sys.stdout.write('X ')
+    else:
+      sys.stdout.write('  ')
+  sys.stdout.write('\n')
+
 
 def render_fret_seperator(character, guitar_string_count):
   fret_character_count = (guitar_string_count * 2) - 1 
   for i in range(fret_character_count):
     sys.stdout.write(character)
   sys.stdout.write('\n')
+
 
 def render_fret_section(fret, guitar_string_count):
   for i in range(0, guitar_string_count):
@@ -87,12 +97,13 @@ def get_chords():
 
 
 def render_chord(chord, guitar_string_count):
-    render_fret_seperator('=', guitar_string_count)
-    for fret in chord:
-      render_fret_section([], guitar_string_count)
-      render_fret_section(fret, guitar_string_count)
-      render_fret_section([], guitar_string_count)
-      render_fret_seperator('-', guitar_string_count)
+  render_fret_header(chord['closed_strings'], guitar_string_count)
+  render_fret_seperator('=', guitar_string_count)
+  for fret in chord['frets']:
+    render_fret_section([], guitar_string_count)
+    render_fret_section(fret, guitar_string_count)
+    render_fret_section([], guitar_string_count)
+    render_fret_seperator('-', guitar_string_count)
 
 
 def show_quiz_prompt(chords, current_question, current_question_number):
@@ -116,7 +127,7 @@ def main():
   for i in range(quiz_question_count):
     random_chord_key = random.choice(list(chord_map.keys()))
     if random_chord_key in chord_map:
-      render_chord(chord_map[random_chord_key]['frets'], guitar_string_count)
+      render_chord(chord_map[random_chord_key], guitar_string_count)
       current_question_number = i+1
     
       if show_quiz_prompt(chord_map, current_question_number, quiz_question_count) == random_chord_key:
