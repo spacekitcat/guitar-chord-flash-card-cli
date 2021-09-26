@@ -28,6 +28,15 @@ Add new chords to the hard-coded dictionary returned by `get_chords` by adding a
 
 where `a_minor` is the unqiue key for the chord and the value is an array of sequentially ordered arrays. Each child array represents a fret on the fret board (index 0 = fret 1, index 1 = fret 2 etc). Each element within each child array represents the integer value of the string that should be pressed on the fret board (duplicates do not matter) for the current fret. A blank child array will render the current fret with no strings pressed.
 
+## Limitations
+
+Limitations to overcome, left as an exercise to the user.
+
+- Questions often repeat.
+- Doesn't indicate open strings.
+
+I should probably go actually learn the guitar instead of writing daft wee programs like this.
+
 ## License
 
 MIT
